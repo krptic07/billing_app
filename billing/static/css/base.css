@@ -1,0 +1,140 @@
+body{
+  background-color: #DDE6E8  ;
+  font-size:16px;
+}
+.mainjumboclass{
+  height: 500px;
+  background:url('https://raw.githubusercontent.com/abish97/chea/master/imageedit_1_7410890597.jpg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+.formjumboclass{
+  height: 100%;
+  /* background:url('https://raw.githubusercontent.com/abish97/chea/master/imageedit_6_7933082871.jpg'); */
+  /* background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover; */
+  margin-top: 50px;
+  border-radius: 10px;
+  width:70%;
+  margin-left: 20%;
+}
+.detailsbutton{
+  height: 20px;
+  width: 20px;
+}
+#newbillbutton{
+  width: 30%;
+  height: 30%;
+  margin-top: 30px;
+  margin-right: auto;
+  margin-left: 34%;
+  font-family: 'Staatliches', cursive;
+  font-size: 20px;
+  letter-spacing: 5px;
+  word-spacing: 3px;
+  margin-bottom: 10px;
+}
+#detbutton{
+  padding: 5px;
+  margin: 10px;
+  color: white;
+  text-shadow: 1px 2px 2px #F04327;
+  font-weight: bolder;
+}
+th{
+  background:#4DD1EB;
+  text-align: center;
+  padding:10px;
+}
+
+td{
+  text-align: center;
+  font-family: 'Thasadith', sans-serif;
+  font-weight: bolder;
+  color: #1C1C1C;
+}
+.status_table{
+  margin-left: 240px;
+  border: 2px 2px black;
+}
+#tableheading{
+  font-family: 'Titillium Web', sans-serif;
+}
+.statusjumboclass{
+  height: 100%;
+  background:url('https://raw.githubusercontent.com/abish97/chea/master/imageedit_4_8813368901.jpg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+.input{
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 30px;
+
+  margin-left: 400px;
+}
+.inputbox{
+  background: inherit;
+  border: none;
+  border-bottom: 1px solid #000000;
+  font-family: 'Open Sans Condensed', sans-serif;
+  margin-left: 10px;
+}
+.loginjumboclass{
+  height: 500px;
+  background:url('https://raw.githubusercontent.com/abish97/chea/master/imageedit_2_8154341619.jpg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+.heading{
+  font-family: 'Staatliches', cursive;
+  text-align: center;
+  padding-top: 200px;
+  color: #241D19  ;
+  text-shadow: 1px 1px 10px #9AECFC;
+  font-size: 80px;
+  letter-spacing: 5px;
+    word-spacing: 3px;
+}
+.loginbutton{
+  text-align: center;
+  margin-left: 500px;
+  margin-top: -30px;
+  border-radius: 3px;
+    font-family: 'Staatliches', cursive;
+    font-size: 20px;
+    background: inherit;
+    color: #006C81  ;
+  height: 40px;
+  width: 100px;
+}
+.loginheading{
+  font-family: 'Staatliches', cursive;
+  text-align: center;
+    letter-spacing: 5px;
+    word-spacing: 3px;
+  padding-top: 80px;
+  font-size: 60px;
+  color: #241D19  ;
+  text-shadow: 1px 1px 10px #9AECFC;
+}
+.statusheading{
+  font-family: 'Staatliches', cursive;
+  text-align: center;
+    letter-spacing: 5px;
+    word-spacing: 3px;
+  padding-top: 80px;
+  font-size: 60px;
+  color: #241D19  ;
+  text-shadow: 1px 1px 10px #9AECFC;
+}

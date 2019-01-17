@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div id="bill-modal-{{ bill.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Beneficiary Name : {{ bill.beneficiary_name }}</h4>
+        <h4 class="modal-title">Department Name : {{ bill.department_name }}</h4>
+        <h4 class="modal-title">Bill Number : {{ bill.bill_no }}</h4>
+        <h4 class="modal-title">Date on Bill :{{ bill.date_on_doc }}</h4>
+        <h4 class="modal-title">Amount :{{ bill.bill_amount }}</h4>
+        <h4 class="modal-title">Head Code :{{ bill.head_code }}</h4>
+        <h4 class="modal-title">Status :{{ bill.status }}</h4>
+        <h4 class="modal-title">Email : {{ bill.email }}</h4>
+        <h4 class="modal-title">Mobile : {{ bill.mobile }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,23 @@
+
+label{
+  font-family: 'Staatliches', cursive;
+  margin-left: 30%;
+  font-size: 24px;
+  width:200px;
+}
+input{
+  font-family: 'Titillium Web', sans-serif;
+  text-align: center;
+  background: inherit;
+  border: none;
+  border-bottom: 1px solid #000000;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.formjumboclass{
+  padding-top: 60px;
+}
+#submitbutton{
+  width: 20%;
+  margin-bottom: 10px;
+  margin-left: 50%;
+}
