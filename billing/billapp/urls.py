@@ -7,7 +7,9 @@ from billapp import views
 urlpatterns=[
     url(r'^$',views.status_list,name='status_list'),
     url(r'^newbill/',views.newbill,name='newbill'),
-    # url(r'^update ',views.update,name='update'),
+    url(r'^update ',views.update,name='update'),
     url(r'^register/',views.register,name='register'),
-    url(r'^user_login/',views.user_login,name='user_login'),
+    url(r'^checkStatus/', views.check_bill_status, name='check_status'),
+
+    url(r'public/',views.user_login,name='user_login'),
 ]

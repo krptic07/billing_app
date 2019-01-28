@@ -1,18 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from billapp.forms import NewBill,UserForm,UserProfileInfoForm
 from billapp.models import bill
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 # from .filters import UserFilter
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib import messages
 from django.views.generic import (TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
 import datetime
 # Create your views here.
+
 def index(request):
     return render(request,'billapp/index.html',)
+
 
 def user_login(request):
 
@@ -20,20 +23,39 @@ def user_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username,password=password)
+        user = authenticate(username=username ,password=password)
 
         if user:
             if user.is_active:
-                login(request,user)
-                return HttpResponseRedirect(reverse('index'))
+                login(request, user)
+                return HttpResponseRedirect('/')
             else:
-                return HttpResponse("ACCOUNT NOT ACTIVE")
+                messages.add_message(request, messages.INFO, "Account Inactive. Contact WSDC.")
+
         else:
             print("Someone tried to login and failed!")
-            print("Username: {} and password: {}".format(username,password))
-            return HttpResponse("invalid login details")
+            print("Username: {} and password: {}".format(username, password))
+            messages.add_message(request, messages.INFO, "Incorrect username or password")
+
+    return render(request,'billapp/login.html',{})
+
+
+def check_bill_status(request):
+
+    serial_no = request.GET.get('serial_no', None)
+    context = {}
+
+    if serial_no is None or serial_no == "":
+        messages.add_message(request, messages.ERROR, "Enter a valid Reference ID")
     else:
-        return render(request,'billapp/login.html',{})
+        bill_ob = bill.objects.filter(serial_no=serial_no)
+        if not bill_ob.exists():
+            messages.add_message(request, messages.ERROR, "No bill with that Reference ID found.")
+        else:
+            context['bill'] = bill_ob.first()
+
+    return render(request, 'billapp/login.html', context)
+
 
 def register(request):
 
@@ -99,17 +121,19 @@ def newbill(request):
 @login_required
 def user_logout(request):
         logout(request)
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect('/')
 
-# @login_required
-# def update(request):
-#     id = request.GET['id']
-#     instance = bill.objects.get(serial_no=id)
-#     form = NewBill(request.POST or None, instance=instance)
-#     if form.is_valid():
-#         form.save()
-#         return redirect('/billapp')
-#     return render(request, 'my_template.html', {'form': form})
+@login_required
+def update(request):
+    id = request.POST['serial_no']
+    instance = bill.objects.get(serial_no=id)
+    form = NewBill(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+    else:
+        messages.add_message(request, messages.ERROR, str(form.errors))
+    return redirect('/')
+
 # def search(request):
 #     bill_list = bill.objects.all()
 #     bill_filter = BillFilter(request.GET, queryset=bill_list)

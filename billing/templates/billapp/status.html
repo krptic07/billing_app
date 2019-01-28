@@ -1,35 +1,77 @@
 <!DOCTYPE html>
 {% extends 'billapp/base.html' %}
 {% load staticfiles%}
-{% block body_block %}
+{% block container %}
 
-    <div class="container">
-      <div class="statusjumboclass">
-        <p class="statusheading">Here is the list of all bills:</p>
+    <div class="">
+      <div class="">
+{#        <p class="">Here is the list of all bills:</p>#}
+      {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-dismissable alert-success"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+      {% endif %}
         <br><br><br>
-        <div class="status_table">
+        <div class="">
           {% if bill_records %}
-            <table id="billtable">
-              <thead id="tableheading">
-                <th>Bill Number</th>
-                <th>Bill Amount</th>
-                <th>Benificiary Name</th>
-                <th>Date On Document</th>
-                <th>Status</th>
-              </thead>
-              {% for bill in bill_records %}
+              <table class="table table-striped table-bordered" style="overflow-y: scroll">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col" colspan="3">Department (Name, Mail, Phone)</th>
+                      <th scope="col" colspan="2">Beneficiary (Name, Mail)</th>
+                      <th scope="col">Date on Document</th>
+                      <th scope="col">Head Code</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Remarks</th>
+                      <th scope="col" colspan="2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for bill in bill_records %}
                 <tr id={{bill}}>
-                  <td>{{bill.bill_no}}</td>
-                  <td>{{bill.bill_amount}}</td>
-                  <td>{{bill.beneficiary_name}}</td>
-                  <td>{{bill.date_on_doc}}</td>
-                  <td>{{bill.get_status_display}}</td>
-                  <td> <button type="button" class="btn btn-info btn-sm" id="detbutton" data-toggle="modal" data-target="#bill-modal-{{ bill.id }}">View Details</button> </td>
-                  <td> <a class='btn btn-primary btn-sm' id="detbutton" href="{% url 'newbill' %}/{{bill.serial_no}}"> Update Bill </a></td>
+                <form class="form" action="{% url 'update' %}" method="post">
+                    {% csrf_token %}
+                  <input type="hidden" value="{{bill.serial_no}}" name="serial_no">
+                  <input type="hidden" value="{{bill.bill_no}}" name="bill_no">
+                  <input type="hidden" value="{{bill.current_date | date:'Y-m-d'}}" name="current_date">
+
+                  <td>{{ bill.bill_no }}</td>
+                  <td><input type="number" value="{{bill.bill_amount}}" name="bill_amount"> </td>
+                  <td><input type="text" value="{{bill.department_name}}" name="department_name"> </td>
+                  <td><input type="text" value="{{bill.email}}" name="email"> </td>
+                  <td><input type="text" value="{{bill.mobile}}" name="mobile"> </td>
+                  <td><input type="text" value="{{bill.beneficiary_name}}" name="beneficiary_name"> </td>
+                  <td><input type="text" value="{{bill.beneficiary_email}}" name="beneficiary_email"> </td>
+                  <td><input type="date" value="{{bill.date_on_doc | date:'Y-m-d'}}" name="date_on_doc"> </td>
+                  <td><input type="text" value="{{bill.head_code}}" name="head_code"> </td>
+
+
+                    <td><select name="status">
+                        <option value="{{ bill.status }}">{{bill.get_status_display}}</option>
+                        {% if bill.status is not 'pro' %}<option value="pro">Processed</option>{% endif %}
+                        {% if bill.status is not 'unp' %}<option value="pro">Under Process</option>{% endif %}
+                        {% if bill.status is not 'def' %}<option value="pro">Deficiency in docs</option>{% endif %}
+                        {% if bill.status is not 'rec' %}<option value="pro">Received in Accounts</option>{% endif %}
+
+
+                    </select></td>
+                <td><input type="text" value="{{bill.remarks}}" name="remarks"> </td>
+
+                  <td>
+
+{#                  <button type="button" class="btn btn-info btn-sm" id="detbutton" data-toggle="modal" data-target="#bill-modal-{{ bill.id }}">Details</button>#}
+{#                  <a class='btn btn-primary btn-sm' id="detbutton" href="{% url 'newbill' %}/{{bill.serial_no}}"> Modify</a>#}
+                  <input type="submit" class="btn btn-primary btn-sm" value="Save">
+
+                  </td>
+                </form>
 
                 </tr>
               {% endfor %}
-            </table>
+                  </tbody>
+                </table>
           {% else %}
             <p>NO BILLS FOUND</p>
           {% endif %}

@@ -1,47 +1,19 @@
-<!DOCTYPE html>
+{% extends 'billapp/base.html' %}
 {% load staticfiles %}
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>NewBill</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{% block body_block %}
+{% load crispy_forms_tags %}
 
-    <link rel="stylesheet" href="{% static 'css/form.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Thasadith" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <!-- <li><a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li> -->
-          <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
-          <!-- <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li> -->
-          {% if user.is_authenticated %}
-            <li><a class="navbar-link" href="{% url 'logout' %}">LogOut</a></li>
-            <li><a class="navbar-link" href="{% url 'status_list' %}">Status List</a></li>
-            <li><a class="navbar-link" href="{% url 'newbill' %}">New Bill</a></li>
-          {% else %}
-            <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
-          {% endif %}
-        </ul>
+
+<div class="formjumboclass" style="margin-bottom: 50px;">
+<b><h3>Create New Bill</h3></b>
+    <br/>
+    <form method="POST">
+      <div class="formclass">
+        {{form|crispy}}
+        {% csrf_token%}
       </div>
-    </nav>
-    <div class="container">
-      <div class="formjumboclass">
-        <form method="POST">
-          <div class="formclass">
-            {{form.as_p}}
-            {% csrf_token%}
-          </div>
+      <center><input type="submit" name="btn btn-primary" class="btn btn-primary" id="submitbutton" value="Save New Bill"></center>
+    </form>
+</div>
 
-          <input type="submit" name="btn btn-primary" class="btn btn-default" id="submitbutton" value="Submit">
-        </form>
-      </div>
-
-    </div>
-  </body>
-</html>
+{% endblock %}

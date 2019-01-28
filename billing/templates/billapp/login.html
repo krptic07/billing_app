@@ -3,18 +3,80 @@
 {% block body_block %}
 
 <div class="loginjumboclass">
-  <p class="loginheading">Please Login</p>
-  <form action="{% url 'user_login' %}" method="POST">
-    {% csrf_token %}
-    <br><br><br>
-    <label class="input" for="username">Username:</label>
-    <input class="inputbox" type="text" name="username" placeholder="Enter Username">
-    <br><br>
-    <label class="input" for="password">Password:</label>
-    <input class="inputbox" type="password" name="password">
-    <br><br><br><br>
-    <input class="loginbutton" type="submit" name="" value="Login">
-  </form>
+{#  <p class="loginheading">Please Login</p>#}
+{#  <form action="{% url 'user_login' %}" method="POST">#}
+{#    {% csrf_token %}#}
+{#    <br><br><br>#}
+{#    <label class="input" for="username">Username:</label>#}
+{#    <input class="inputbox" type="text" name="username" placeholder="Enter Username">#}
+{#    <br><br>#}
+{#    <label class="input" for="password">Password:</label>#}
+{#    <input class="inputbox" type="password" name="password">#}
+{#    <br><br><br><br>#}
+{#    <input class="loginbutton" type="submit" name="" value="Login">#}
+{#  </form>#}
+
+<div class="container login-container">
+            <div class="row">
+                {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-dismissable alert-success"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+                            {% endfor %}
+                    {% endif %}
+                {% if not request.user.is_authenticated %}
+                <div class="col-md-6 login-form-1">
+                    <h3><b>Staff Login</b></h3>
+                    <form class="form" action="{% url 'user_login' %}" method='POST' >
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Username *" value=""  name="username"  />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Your Password *" value="" name="password"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+                    </form>
+
+                </div>
+                {% endif %}
+                <div class="col-md-6 login-form-2">
+                    {% if not request.user.is_authenticated %}
+                    <div class="login-logo">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                    </div>
+                    {% endif %}
+                    {% if not bill %}
+                    <form class="form" action="{% url 'check_status' %}">
+                        {% csrf_token %}
+                        <h3><b>Check Bill Status</b></h3>
+                        <div class="form-group">
+                            <label for="bill_no">Enter your Bill Reference ID as received on mail</label>
+                            <input type="text" class="form-control" placeholder="Reference ID*" value="" name="serial_no"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Check Status" />
+                        </div>
+                    </form>
+                    {% else %}
+                        <div class="alert alert-info" style="margin-top: -45px;">
+                            <center><b>Bill Status</b></center><br/>
+                            <b>Reference ID:</b> {{ bill.serial_no }}
+                            <br/><br/>
+                            <b>Amount:</b> Rs. {{ bill.bill_amount}}
+                            <br/><br/>
+                            <b>Beneficiary:</b> {{ bill.beneficiary_name}}
+                            <br/><br/>
+                            <b>Department:</b> {{ bill.department_name}}
+                            <br/><br/>
+                            <span style="color:red"><b>Status:</b> {{ bill.get_status_display}}</span>
+                        </div>
+                        <center><a href="/public" style="color:white;text-decoration: underline;">Check Another Bill</a></center>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 </div>
 
 {% endblock %}

@@ -87,8 +87,7 @@ td{
   margin-left: 10px;
 }
 .loginjumboclass{
-  height: 500px;
-  background:url('https://raw.githubusercontent.com/abish97/chea/master/imageedit_2_8154341619.jpg');
+  /*background:url('https://raw.githubusercontent.com/abish97/chea/master/imageedit_2_8154341619.jpg');*/
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;
@@ -137,4 +136,47 @@ td{
   font-size: 60px;
   color: #241D19  ;
   text-shadow: 1px 1px 10px #9AECFC;
+}
+
+.login-logo{
+    position: relative;
+    margin-left: -41.5%;
+}
+.login-logo img{
+    position: absolute;
+    width: 20%;
+    margin-top: 19%;
+    background: #282726;
+    border-radius: 4.5rem;
+    padding: 5%;
+}
+
+.login-form-1{
+    padding: 9%;
+    background:#282726;
+    height: 400px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-1 h3{
+    text-align: center;
+    color:#fff;
+}
+.login-form-2{
+    padding: 9%;
+    height: 400px;
+    background: #f05837;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-2 h3{
+    text-align: center;
+    color: #fff;
+}
+.btnSubmit{
+    font-weight: 600;
+    width: 50%;
+    color: #282726;
+    background-color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    padding:2%;
 }

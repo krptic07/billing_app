@@ -17,8 +17,7 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from billapp import views
 urlpatterns = [
-    url(r'^$',views.index,name="index"),
-    url(r'^billapp/',include('billapp.urls')),
+    url(r'^', include('billapp.urls')),
     url(r'^logout/',views.user_logout,name='logout'),
     url(r'^admin/', admin.site.urls),
 ]
