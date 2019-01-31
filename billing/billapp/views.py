@@ -7,10 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
+from django.core.mail import EmailMessage
 from django.views.generic import (TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
+import django
+from django.conf import settings
+from django.core.mail import send_mail
 import datetime
+
 # Create your views here.
 
 def index(request):
@@ -110,6 +115,10 @@ def newbill(request):
         form = NewBill(request.POST)
 
         if form.is_valid():
+                send_to = request.POST.get('email')
+                beneficiary_email = request.POST.get('beneficiary_email')
+                email = EmailMessage('Subject', 'Body', to=[send_to,beneficiary_email])
+                email.send()
                 form.save(commit=True)
                 return index(request)
 
@@ -133,8 +142,3 @@ def update(request):
     else:
         messages.add_message(request, messages.ERROR, str(form.errors))
     return redirect('/')
-
-# def search(request):
-#     bill_list = bill.objects.all()
-#     bill_filter = BillFilter(request.GET, queryset=bill_list)
-#     return render(request, 'billapp/search.html', {'filter': bill_filter})

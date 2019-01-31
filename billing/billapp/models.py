@@ -29,7 +29,7 @@ class bill(models.Model):
     bill_amount = models.IntegerField(default=10)
     head_code = models.CharField(max_length=264)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
-    email = models.EmailField()
+    email= models.EmailField()
     mobile = models.IntegerField(default=10,unique=True)
     remarks = models.TextField(null=True)
 
