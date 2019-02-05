@@ -144,3 +144,5 @@ EMAIL_HOST_USER='wsdcbills@gmail.com'
 EMAIL_HOST_PASSWORD='nitwwsdc'
 EMAIL_USE_TLS=True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+DOMAIN_NAME = 'http://localhost:8000/'

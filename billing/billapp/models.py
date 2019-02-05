@@ -24,13 +24,13 @@ class bill(models.Model):
     department_name = models.CharField(max_length=264)
     beneficiary_name = models.CharField(max_length=264)
     beneficiary_email = models.EmailField()
-    bill_no = models.IntegerField(default=170, unique=True)
+    bill_no = models.CharField(unique=True, max_length=100)
     date_on_doc = models.DateField()
     bill_amount = models.IntegerField(default=10)
     head_code = models.CharField(max_length=264)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     email= models.EmailField()
-    mobile = models.IntegerField(default=10,unique=True)
+    mobile = models.IntegerField(default=10)
     remarks = models.TextField(null=True)
 
     def __str__(self):
